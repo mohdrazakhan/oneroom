@@ -1,0 +1,238 @@
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 100px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f9fafb 0%, #ffffff 50%, #f3f0ff 100%);
+}
+
+.particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-radius: 50%;
+    opacity: 0.15;
+    animation: float infinite ease-in-out;
+}
+
+.hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-text {
+    animation: slideInLeft 1s ease-out;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: var(--radius-full);
+    color: var(--primary);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    animation: pulse 2s infinite;
+}
+
+.badge-icon {
+    font-size: 1.2rem;
+}
+
+.hero-title {
+    font-size: 4.5rem;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+}
+
+.hero-description {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    max-width: 550px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.hero-buttons .btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+}
+
+.hero-buttons .btn svg {
+    transition: transform 0.3s ease;
+}
+
+.hero-buttons .btn:hover svg {
+    transform: translateY(3px);
+}
+
+.hero-stats {
+    display: flex;
+    gap: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+}
+
+.stat {
+    text-align: left;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 800;
+    font-family: var(--font-heading);
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.hero-image {
+    position: relative;
+    animation: slideInRight 1s ease-out;
+}
+
+.phone-mockup {
+    position: relative;
+    z-index: 2;
+}
+
+.phone-mockup img {
+    width: 100%;
+    max-width: 600px;
+    filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.2));
+}
+
+.glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.4;
+    z-index: -1;
+    animation: pulse 4s infinite;
+}
+
+.glow-1 {
+    width: 400px;
+    height: 400px;
+    background: var(--primary);
+    top: 10%;
+    left: -10%;
+}
+
+.glow-2 {
+    width: 350px;
+    height: 350px;
+    background: var(--secondary);
+    bottom: 10%;
+    right: -10%;
+    animation-delay: 2s;
+}
+
+@media (max-width: 1024px) {
+    .hero-title {
+        font-size: 3.5rem;
+    }
+
+    .hero-content {
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding-top: 80px;
+        min-height: auto;
+    }
+
+    .hero-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: center;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-description {
+        font-size: 1.1rem;
+        margin: 0 auto 2rem;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .hero-stats {
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    .stat {
+        text-align: center;
+    }
+
+    .phone-mockup img {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-stats {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+    }
+}

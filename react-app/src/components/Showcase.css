@@ -1,0 +1,79 @@
+.showcase-section {
+    background: linear-gradient(to bottom, var(--bg-card), #ffffff);
+    overflow: hidden;
+}
+
+.showcase-scroll {
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    padding: 2rem 0;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+}
+
+.showcase-scroll::-webkit-scrollbar {
+    height: 8px;
+}
+
+.showcase-scroll::-webkit-scrollbar-track {
+    background: var(--bg-card);
+    border-radius: var(--radius-full);
+}
+
+.showcase-scroll::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: var(--radius-full);
+}
+
+.screenshot-card {
+    flex: 0 0 320px;
+    scroll-snap-align: center;
+}
+
+.screenshot-wrapper {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    transition: all 0.3s ease;
+}
+
+.screenshot-wrapper:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-xl);
+}
+
+.screenshot-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.screenshot-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    padding: 2rem 1.5rem 1.5rem;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.screenshot-wrapper:hover .screenshot-overlay {
+    transform: translateY(0);
+}
+
+.screenshot-title {
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+    .screenshot-card {
+        flex: 0 0 280px;
+    }
+}
