@@ -1,0 +1,54 @@
+:root {
+    /* Brand Colors (Lite Theme) */
+    --primary: #8B5CF6;
+    /* Vibrant Purple */
+    --primary-hover: #7C3AED;
+    /* Darker Purple */
+    --secondary: #A78BFA;
+    /* Soft Purple Accent */
+    --accent: #F472B6;
+    /* Pink Accent */
+
+    /* Backgrounds */
+    --bg-dark: #FFFFFF;
+    /* Body Background (renamed concept, keeping var name) */
+    --bg-card: #F9FAFB;
+    /* Slightly off-white for contrast or white */
+    --bg-surface: #FFFFFF;
+
+    /* Text */
+    --text-main: #1F2937;
+    /* Dark Gray for primary text */
+    --text-muted: #6B7280;
+    /* Grey for secondary text */
+    --text-invert: #FFFFFF;
+    /* Text on primary buttons */
+
+    /* Borders & Dividers */
+    --border: #E5E7EB;
+
+    /* Typography */
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 8rem;
+
+    /* Radius */
+    --radius-sm: 0.5rem;
+    --radius-md: 1rem;
+    --radius-lg: 1.5rem;
+    /* Softer, larger radius */
+    --radius-full: 9999px;
+
+    /* Shadows (Crucial for Light Theme) */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-glow: 0 0 20px rgba(139, 92, 246, 0.3);
+    /* Purple glow */
+}
