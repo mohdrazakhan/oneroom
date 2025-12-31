@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 
-const JWT_SECRET = process.env.JWT_SECRET || 'oneroom-secret-key-change-in-production';
+// Get JWT_SECRET from environment (set in server/index.js with validation)
+const JWT_SECRET = process.env.JWT_SECRET;
 
 /**
  * Middleware to verify JWT token

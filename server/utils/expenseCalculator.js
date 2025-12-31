@@ -64,18 +64,15 @@ function calculateBalances(expenses, members) {
   expenses.forEach(expense => {
     const paidById = expense.paidBy.toString();
     
+    // First, the payer is credited with the full amount they paid
+    balances[paidById] += expense.amount;
+    
+    // Then, each person (including the payer) is debited their share
     expense.splitBetween.forEach(split => {
       const userId = split.user.toString();
       
       if (!split.settled) {
-        if (userId === paidById) {
-          // If user paid and is in split, they're owed the other portions
-          balances[userId] += (expense.amount - split.amount);
-        } else {
-          // User owes their portion
-          balances[userId] -= split.amount;
-          balances[paidById] += split.amount;
-        }
+        balances[userId] -= split.amount;
       }
     });
   });

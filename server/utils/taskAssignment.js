@@ -2,6 +2,7 @@
  * Auto-assign tasks to roommates in a fair rotation
  */
 const Task = require('../models/Task');
+const Room = require('../models/Room');
 
 /**
  * Get the next user in rotation for task assignment
@@ -57,8 +58,6 @@ async function getNextAssignee(members, roomId, taskCategory) {
  * @param {String} roomId - Room ID
  */
 async function rotateRecurringTasks(roomId) {
-  const Room = require('../models/Room');
-  
   const room = await Room.findById(roomId).populate('members.user');
   if (!room || room.members.length === 0) {
     return;

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Expense = require('../models/Expense');
 const Room = require('../models/Room');
+const User = require('../models/User');
 const { auth } = require('../middleware/auth');
 const { calculateEqualSplit, calculateCustomSplit, calculateBalances } = require('../utils/expenseCalculator');
 
@@ -110,21 +111,17 @@ router.get('/room/:roomId/balances', auth, async (req, res) => {
     const balanceSummary = calculateBalances(expenses, memberIds);
 
     // Populate user details in settlements
-    const populatedSettlements = await Promise.all(
-      balanceSummary.settlements.map(async (settlement) => {
-        const Room = require('../models/Room');
-        const populatedRoom = await Room.findById(roomId).populate('members.user', 'name email');
-        
-        const fromUser = populatedRoom.members.find(m => m.user._id.toString() === settlement.from);
-        const toUser = populatedRoom.members.find(m => m.user._id.toString() === settlement.to);
+    const populatedRoom = await Room.findById(roomId).populate('members.user', 'name email');
+    const populatedSettlements = balanceSummary.settlements.map((settlement) => {
+      const fromUser = populatedRoom.members.find(m => m.user._id.toString() === settlement.from);
+      const toUser = populatedRoom.members.find(m => m.user._id.toString() === settlement.to);
 
-        return {
-          from: fromUser ? fromUser.user : null,
-          to: toUser ? toUser.user : null,
-          amount: settlement.amount
-        };
-      })
-    );
+      return {
+        from: fromUser ? fromUser.user : null,
+        to: toUser ? toUser.user : null,
+        amount: settlement.amount
+      };
+    });
 
     res.json({
       balances: balanceSummary.balances,

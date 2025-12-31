@@ -6,6 +6,19 @@ require('dotenv').config();
 
 const app = express();
 
+// Validate required environment variables
+if (!process.env.JWT_SECRET) {
+  console.warn('WARNING: JWT_SECRET not set. Using default for development only.');
+  console.warn('For production, set JWT_SECRET in your environment variables.');
+  // Only set default in development
+  if (process.env.NODE_ENV !== 'production') {
+    process.env.JWT_SECRET = 'dev-secret-key-do-not-use-in-production';
+  } else {
+    console.error('FATAL ERROR: JWT_SECRET must be set in production.');
+    process.exit(1);
+  }
+}
+
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
