@@ -5,9 +5,10 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const { JWT_SECRET } = require('../middleware/auth');
 const { auth } = require('../middleware/auth');
+const { authLimiter, apiLimiter } = require('../middleware/rateLimiter');
 
-// Register new user
-router.post('/register', async (req, res) => {
+// Register new user (with strict rate limiting)
+router.post('/register', authLimiter, async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
@@ -52,8 +53,8 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// Login user
-router.post('/login', async (req, res) => {
+// Login user (with strict rate limiting)
+router.post('/login', authLimiter, async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -93,7 +94,7 @@ router.post('/login', async (req, res) => {
 });
 
 // Get current user profile
-router.get('/me', auth, async (req, res) => {
+router.get('/me', auth, apiLimiter, async (req, res) => {
   try {
     const user = await User.findById(req.userId)
       .select('-password')
@@ -111,7 +112,7 @@ router.get('/me', auth, async (req, res) => {
 });
 
 // Update user profile
-router.put('/me', auth, async (req, res) => {
+router.put('/me', auth, apiLimiter, async (req, res) => {
   try {
     const { name } = req.body;
     

@@ -5,9 +5,10 @@ const Room = require('../models/Room');
 const User = require('../models/User');
 const { auth } = require('../middleware/auth');
 const { calculateEqualSplit, calculateCustomSplit, calculateBalances } = require('../utils/expenseCalculator');
+const { apiLimiter, createLimiter } = require('../middleware/rateLimiter');
 
 // Create a new expense
-router.post('/', auth, async (req, res) => {
+router.post('/', auth, createLimiter, async (req, res) => {
   try {
     const { roomId, description, amount, category, splitType, customSplits } = req.body;
 
@@ -60,7 +61,7 @@ router.post('/', auth, async (req, res) => {
 });
 
 // Get all expenses for a room
-router.get('/room/:roomId', auth, async (req, res) => {
+router.get('/room/:roomId', auth, apiLimiter, async (req, res) => {
   try {
     const { roomId } = req.params;
 
@@ -88,7 +89,7 @@ router.get('/room/:roomId', auth, async (req, res) => {
 });
 
 // Get balance summary for a room
-router.get('/room/:roomId/balances', auth, async (req, res) => {
+router.get('/room/:roomId/balances', auth, apiLimiter, async (req, res) => {
   try {
     const { roomId } = req.params;
 
@@ -134,7 +135,7 @@ router.get('/room/:roomId/balances', auth, async (req, res) => {
 });
 
 // Update expense
-router.put('/:id', auth, async (req, res) => {
+router.put('/:id', auth, apiLimiter, async (req, res) => {
   try {
     const { description, amount, category } = req.body;
     
@@ -177,7 +178,7 @@ router.put('/:id', auth, async (req, res) => {
 });
 
 // Mark expense split as settled
-router.put('/:id/settle/:userId', auth, async (req, res) => {
+router.put('/:id/settle/:userId', auth, apiLimiter, async (req, res) => {
   try {
     const expense = await Expense.findById(req.params.id);
 
@@ -211,7 +212,7 @@ router.put('/:id/settle/:userId', auth, async (req, res) => {
 });
 
 // Delete expense
-router.delete('/:id', auth, async (req, res) => {
+router.delete('/:id', auth, apiLimiter, async (req, res) => {
   try {
     const expense = await Expense.findById(req.params.id);
 
