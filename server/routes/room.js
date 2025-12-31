@@ -7,7 +7,7 @@ const { auth } = require('../middleware/auth');
 const { apiLimiter, createLimiter } = require('../middleware/rateLimiter');
 
 // Create a new room
-router.post('/', auth, createLimiter, async (req, res) => {
+router.post('/', createLimiter, auth, async (req, res) => {
   try {
     const { name, description } = req.body;
 
@@ -44,7 +44,7 @@ router.post('/', auth, createLimiter, async (req, res) => {
 });
 
 // Get all rooms for current user
-router.get('/', auth, apiLimiter, async (req, res) => {
+router.get('/', apiLimiter, auth, async (req, res) => {
   try {
     const rooms = await Room.find({
       'members.user': req.userId
@@ -58,7 +58,7 @@ router.get('/', auth, apiLimiter, async (req, res) => {
 });
 
 // Get a specific room
-router.get('/:id', auth, apiLimiter, async (req, res) => {
+router.get('/:id', apiLimiter, auth, async (req, res) => {
   try {
     const room = await Room.findById(req.params.id)
       .populate('members.user', 'name email');
@@ -81,7 +81,7 @@ router.get('/:id', auth, apiLimiter, async (req, res) => {
 });
 
 // Join a room with invite code
-router.post('/join', auth, createLimiter, async (req, res) => {
+router.post('/join', createLimiter, auth, async (req, res) => {
   try {
     const { inviteCode } = req.body;
 
@@ -124,7 +124,7 @@ router.post('/join', auth, createLimiter, async (req, res) => {
 });
 
 // Update room
-router.put('/:id', auth, apiLimiter, async (req, res) => {
+router.put('/:id', apiLimiter, auth, async (req, res) => {
   try {
     const { name, description } = req.body;
     
@@ -152,7 +152,7 @@ router.put('/:id', auth, apiLimiter, async (req, res) => {
 });
 
 // Remove member from room
-router.delete('/:id/members/:userId', auth, apiLimiter, async (req, res) => {
+router.delete('/:id/members/:userId', apiLimiter, auth, async (req, res) => {
   try {
     const room = await Room.findById(req.params.id);
 

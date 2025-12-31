@@ -94,7 +94,7 @@ router.post('/login', authLimiter, async (req, res) => {
 });
 
 // Get current user profile
-router.get('/me', auth, apiLimiter, async (req, res) => {
+router.get('/me', apiLimiter, auth, async (req, res) => {
   try {
     const user = await User.findById(req.userId)
       .select('-password')
@@ -112,7 +112,7 @@ router.get('/me', auth, apiLimiter, async (req, res) => {
 });
 
 // Update user profile
-router.put('/me', auth, apiLimiter, async (req, res) => {
+router.put('/me', apiLimiter, auth, async (req, res) => {
   try {
     const { name } = req.body;
     

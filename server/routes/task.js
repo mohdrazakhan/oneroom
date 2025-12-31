@@ -7,7 +7,7 @@ const { getNextAssignee, rotateRecurringTasks } = require('../utils/taskAssignme
 const { apiLimiter, createLimiter } = require('../middleware/rateLimiter');
 
 // Create a new task
-router.post('/', auth, createLimiter, async (req, res) => {
+router.post('/', createLimiter, auth, async (req, res) => {
   try {
     const { roomId, title, description, assignedTo, category, priority, dueDate, recurring } = req.body;
 
@@ -58,7 +58,7 @@ router.post('/', auth, createLimiter, async (req, res) => {
 });
 
 // Get all tasks for a room
-router.get('/room/:roomId', auth, apiLimiter, async (req, res) => {
+router.get('/room/:roomId', apiLimiter, auth, async (req, res) => {
   try {
     const { roomId } = req.params;
     const { status } = req.query;
@@ -91,7 +91,7 @@ router.get('/room/:roomId', auth, apiLimiter, async (req, res) => {
 });
 
 // Get tasks assigned to current user
-router.get('/my-tasks', auth, apiLimiter, async (req, res) => {
+router.get('/my-tasks', apiLimiter, auth, async (req, res) => {
   try {
     const { status } = req.query;
 
@@ -112,7 +112,7 @@ router.get('/my-tasks', auth, apiLimiter, async (req, res) => {
 });
 
 // Update task status
-router.put('/:id/status', auth, apiLimiter, async (req, res) => {
+router.put('/:id/status', apiLimiter, auth, async (req, res) => {
   try {
     const { status } = req.body;
 
@@ -194,7 +194,7 @@ router.put('/:id/status', auth, apiLimiter, async (req, res) => {
 });
 
 // Update task
-router.put('/:id', auth, apiLimiter, async (req, res) => {
+router.put('/:id', apiLimiter, auth, async (req, res) => {
   try {
     const { title, description, assignedTo, category, priority, dueDate, recurring } = req.body;
     
@@ -233,7 +233,7 @@ router.put('/:id', auth, apiLimiter, async (req, res) => {
 });
 
 // Delete task
-router.delete('/:id', auth, apiLimiter, async (req, res) => {
+router.delete('/:id', apiLimiter, auth, async (req, res) => {
   try {
     const task = await Task.findById(req.params.id);
 
@@ -259,7 +259,7 @@ router.delete('/:id', auth, apiLimiter, async (req, res) => {
 });
 
 // Rotate recurring tasks for a room (admin only)
-router.post('/room/:roomId/rotate', auth, createLimiter, async (req, res) => {
+router.post('/room/:roomId/rotate', createLimiter, auth, async (req, res) => {
   try {
     const { roomId } = req.params;
 

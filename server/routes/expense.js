@@ -8,7 +8,7 @@ const { calculateEqualSplit, calculateCustomSplit, calculateBalances } = require
 const { apiLimiter, createLimiter } = require('../middleware/rateLimiter');
 
 // Create a new expense
-router.post('/', auth, createLimiter, async (req, res) => {
+router.post('/', createLimiter, auth, async (req, res) => {
   try {
     const { roomId, description, amount, category, splitType, customSplits } = req.body;
 
@@ -61,7 +61,7 @@ router.post('/', auth, createLimiter, async (req, res) => {
 });
 
 // Get all expenses for a room
-router.get('/room/:roomId', auth, apiLimiter, async (req, res) => {
+router.get('/room/:roomId', apiLimiter, auth, async (req, res) => {
   try {
     const { roomId } = req.params;
 
@@ -89,7 +89,7 @@ router.get('/room/:roomId', auth, apiLimiter, async (req, res) => {
 });
 
 // Get balance summary for a room
-router.get('/room/:roomId/balances', auth, apiLimiter, async (req, res) => {
+router.get('/room/:roomId/balances', apiLimiter, auth, async (req, res) => {
   try {
     const { roomId } = req.params;
 
@@ -135,7 +135,7 @@ router.get('/room/:roomId/balances', auth, apiLimiter, async (req, res) => {
 });
 
 // Update expense
-router.put('/:id', auth, apiLimiter, async (req, res) => {
+router.put('/:id', apiLimiter, auth, async (req, res) => {
   try {
     const { description, amount, category } = req.body;
     
@@ -178,7 +178,7 @@ router.put('/:id', auth, apiLimiter, async (req, res) => {
 });
 
 // Mark expense split as settled
-router.put('/:id/settle/:userId', auth, apiLimiter, async (req, res) => {
+router.put('/:id/settle/:userId', apiLimiter, auth, async (req, res) => {
   try {
     const expense = await Expense.findById(req.params.id);
 
@@ -212,7 +212,7 @@ router.put('/:id/settle/:userId', auth, apiLimiter, async (req, res) => {
 });
 
 // Delete expense
-router.delete('/:id', auth, apiLimiter, async (req, res) => {
+router.delete('/:id', apiLimiter, auth, async (req, res) => {
   try {
     const expense = await Expense.findById(req.params.id);
 
