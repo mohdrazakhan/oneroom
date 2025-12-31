@@ -1,0 +1,32 @@
+{
+  "name": "oneroom",
+  "version": "1.0.0",
+  "description": "Roommate management application for expense splitting and task assignment",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js",
+    "client": "cd client && npm start",
+    "install-all": "npm install && cd client && npm install",
+    "dev-all": "concurrently \"npm run dev\" \"npm run client\"",
+    "build": "cd client && npm run build",
+    "test": "echo \"No tests specified yet\""
+  },
+  "keywords": ["roommate", "expense", "task-management", "splitting"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "mongoose": "^7.0.3",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.0",
+    "body-parser": "^1.20.2",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22",
+    "concurrently": "^8.0.1"
+  }
+}
