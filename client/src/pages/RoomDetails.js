@@ -205,8 +205,11 @@ function RoomDetails({ user }) {
                     recurring: { ...formData.recurring, enabled: e.target.checked }
                   })}
                 />
-                {' '}Recurring Task (Auto-assign)
+                {' '}Recurring Task
               </label>
+              <small style={{ display: 'block', color: '#666', marginTop: '0.25rem' }}>
+                Tasks will automatically rotate to the next roommate upon completion
+              </small>
             </div>
             {formData.recurring.enabled && (
               <div className="form-group">

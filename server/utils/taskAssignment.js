@@ -28,27 +28,53 @@ async function getNextAssignee(members, roomId, taskCategory) {
 
   // Count assignments per member
   const assignmentCounts = {};
+  const lastAssignmentDates = {};
+  
   members.forEach(member => {
     assignmentCounts[member.user.toString()] = 0;
+    lastAssignmentDates[member.user.toString()] = null;
   });
 
   recentTasks.forEach(task => {
     if (task.assignedTo && assignmentCounts.hasOwnProperty(task.assignedTo._id.toString())) {
-      assignmentCounts[task.assignedTo._id.toString()]++;
+      const userId = task.assignedTo._id.toString();
+      assignmentCounts[userId]++;
+      
+      // Track most recent assignment date
+      if (!lastAssignmentDates[userId] || task.createdAt > lastAssignmentDates[userId]) {
+        lastAssignmentDates[userId] = task.createdAt;
+      }
     }
   });
 
-  // Find member with least assignments
+  // Find member with least assignments, using last assignment date as tie-breaker
   let minAssignments = Infinity;
-  let nextAssignee = members[0].user;
+  let candidates = [];
 
   members.forEach(member => {
     const userId = member.user.toString();
     if (assignmentCounts[userId] < minAssignments) {
       minAssignments = assignmentCounts[userId];
-      nextAssignee = member.user;
+      candidates = [{ userId, lastDate: lastAssignmentDates[userId] }];
+    } else if (assignmentCounts[userId] === minAssignments) {
+      candidates.push({ userId, lastDate: lastAssignmentDates[userId] });
     }
   });
+
+  // If multiple candidates, choose the one assigned longest ago (or never assigned)
+  let nextAssignee = members[0].user;
+  if (candidates.length === 1) {
+    nextAssignee = candidates[0].userId;
+  } else {
+    // Sort by last assignment date (nulls first, then oldest first)
+    candidates.sort((a, b) => {
+      if (!a.lastDate && !b.lastDate) return 0;
+      if (!a.lastDate) return -1;
+      if (!b.lastDate) return 1;
+      return a.lastDate - b.lastDate;
+    });
+    nextAssignee = candidates[0].userId;
+  }
 
   return nextAssignee;
 }

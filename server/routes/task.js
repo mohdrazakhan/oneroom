@@ -25,9 +25,11 @@ router.post('/', auth, async (req, res) => {
       return res.status(403).json({ error: 'Access denied' });
     }
 
-    // Auto-assign if not specified
+    // Auto-assign if not specified and auto-assign is enabled (default: true)
     let taskAssignee = assignedTo;
-    if (!taskAssignee && recurring?.autoAssign !== false) {
+    const shouldAutoAssign = !assignedTo && (recurring?.autoAssign !== false);
+    
+    if (shouldAutoAssign) {
       taskAssignee = await getNextAssignee(room.members, roomId, category || 'other');
     }
 
@@ -155,7 +157,13 @@ router.put('/:id/status', auth, async (req, res) => {
           } else if (task.recurring.frequency === 'weekly') {
             nextDueDate.setDate(nextDueDate.getDate() + 7);
           } else if (task.recurring.frequency === 'monthly') {
+            // Handle month-end edge cases
+            const currentDay = nextDueDate.getDate();
             nextDueDate.setMonth(nextDueDate.getMonth() + 1);
+            // If day changed (e.g., Jan 31 -> Mar 3), set to last day of target month
+            if (nextDueDate.getDate() !== currentDay) {
+              nextDueDate.setDate(0); // Set to last day of previous month
+            }
           }
           nextTask.dueDate = nextDueDate;
         }

@@ -152,11 +152,14 @@ router.put('/:id', auth, async (req, res) => {
     expense.description = description || expense.description;
     expense.category = category || expense.category;
     
+    // Only update amount if provided and different
+    // Note: Updating amount will recalculate as equal split
+    // Custom splits are not preserved when changing amounts
     if (amount && amount !== expense.amount) {
-      // Recalculate split with new amount
       const room = await Room.findById(expense.room);
       const memberIds = room.members.map(m => m.user);
       expense.amount = amount;
+      // Recalculate with equal split (custom splits are lost)
       expense.splitBetween = calculateEqualSplit(amount, memberIds);
     }
 
