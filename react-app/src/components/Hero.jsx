@@ -1,8 +1,14 @@
 import { useEffect, useState } from 'react'
 import './Hero.css'
+import statsService from '../services/statsService'
 
 function Hero() {
     const [particles, setParticles] = useState([])
+    const [stats, setStats] = useState({
+        activeUsers: '10K+',
+        appRating: '4.8★',
+        downloads: '50K+'
+    })
 
     useEffect(() => {
         // Generate random particles for background
@@ -17,8 +23,64 @@ function Hero() {
         setParticles(newParticles)
     }, [])
 
+    // Fetch real stats from Firebase
+    useEffect(() => {
+        let unsubscribe;
+
+        const fetchStats = async () => {
+            try {
+                // Real-time subscription to stats
+                unsubscribe = statsService.subscribeToStats((data) => {
+                    const formatNumber = (num) => {
+                        if (num === undefined || num === null) return '0+';
+                        if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M+'
+                        if (num >= 1000) return (num / 1000).toFixed(0) + 'K+'
+                        return num.toString() + '+'
+                    }
+
+                    setStats({
+                        activeUsers: formatNumber(data.activeUsers),
+                        appRating: `${data.appRating !== undefined ? data.appRating : 0}★`,
+                        downloads: formatNumber(data.totalDownloads)
+                    })
+                })
+
+                // Alternative: One-time fetch with Play Store data
+                // const data = await statsService.getAllStats()
+                // setStats({
+                //     activeUsers: formatNumber(data.activeUsers || 10000),
+                //     appRating: `${data.playStore?.rating || data.appRating || 4.8}★`,
+                //     downloads: formatNumber(data.playStore?.downloads || data.totalDownloads || 50000)
+                // })
+            } catch (error) {
+                console.error('Error fetching hero stats:', error)
+            }
+        }
+
+        fetchStats()
+
+        return () => {
+            if (unsubscribe) {
+                unsubscribe()
+            }
+        }
+    }, [])
+
+    const [showIosPopup, setShowIosPopup] = useState(false)
+
+    const handleIosClick = () => {
+        setShowIosPopup(true)
+        setTimeout(() => setShowIosPopup(false), 3000)
+    }
+
     return (
         <section id="hero" className="hero">
+            {showIosPopup && (
+                <div className="ios-popup">
+                    <span>🍎</span>
+                    <span>Coming Soon </span>
+                </div>
+            )}
             <div className="particles">
                 {particles.map(particle => (
                     <div
@@ -41,7 +103,7 @@ function Hero() {
                     <div className="hero-text">
                         <div className="badge">
                             <span className="badge-icon">🎉</span>
-                            <span>Now available on iOS & Android</span>
+                            <span>Now available on Android</span>
                         </div>
 
                         <h1 className="hero-title">
@@ -55,7 +117,7 @@ function Hero() {
                         </p>
 
                         <div className="hero-buttons">
-                            <button className="btn btn-primary">
+                            <button className="btn btn-primary" onClick={handleIosClick}>
                                 <span>Download for iOS</span>
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                                     <path d="M10 3V17M10 17L16 11M10 17L4 11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -77,15 +139,15 @@ function Hero() {
 
                         <div className="hero-stats">
                             <div className="stat">
-                                <div className="stat-number">10K+</div>
+                                <div className="stat-number">{stats.activeUsers}</div>
                                 <div className="stat-label">Active Users</div>
                             </div>
                             <div className="stat">
-                                <div className="stat-number">4.8★</div>
+                                <div className="stat-number">{stats.appRating}</div>
                                 <div className="stat-label">App Rating</div>
                             </div>
                             <div className="stat">
-                                <div className="stat-number">50K+</div>
+                                <div className="stat-number">{stats.downloads}</div>
                                 <div className="stat-label">Downloads</div>
                             </div>
                         </div>

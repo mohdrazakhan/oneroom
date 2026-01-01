@@ -44,8 +44,8 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.5rem 1rem;
-    background: rgba(139, 92, 246, 0.1);
-    border: 1px solid rgba(139, 92, 246, 0.2);
+    background: rgba(142, 124, 240, 0.1);
+    border: 1px solid rgba(142, 124, 240, 0.2);
     border-radius: var(--radius-full);
     color: var(--primary);
     font-size: 0.9rem;
@@ -112,17 +112,16 @@
     font-size: 2rem;
     font-weight: 800;
     font-family: var(--font-heading);
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--primary-hover);
     margin-bottom: 0.25rem;
 }
 
-.stat-label {
+.hero .stat-label {
     font-size: 0.9rem;
-    color: var(--text-muted);
-    font-weight: 500;
+    color: #374151;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .hero-image {
@@ -234,5 +233,40 @@
 
     .hero-buttons .btn {
         width: 100%;
+    }
+}
+
+/* iOS Popup Notification */
+.ios-popup {
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(15, 23, 42, 0.95);
+    color: white;
+    padding: 16px 24px;
+    border-radius: 50px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 500;
+    font-size: 1rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: slideDownFade 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideDownFade {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
     }
 }

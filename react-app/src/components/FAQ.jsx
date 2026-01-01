@@ -51,8 +51,7 @@ function FAQ() {
                     {faqs.map((faq, index) => (
                         <div
                             key={index}
-                            className={`faq-item reveal ${openIndex === index ? 'open' : ''}`}
-                            style={{ animationDelay: `${index * 0.05}s` }}
+                            className={`faq-item ${openIndex === index ? 'open' : ''}`}
                         >
                             <button
                                 className="faq-question"
@@ -84,7 +83,7 @@ function FAQ() {
 
                 <div className="faq-cta reveal">
                     <p>Still have questions?</p>
-                    <button className="btn btn-primary">Contact Support</button>
+                    <a href="mailto:care.oneroom@gmail.com" className="btn btn-primary">Contact Support</a>
                 </div>
             </div>
         </section>

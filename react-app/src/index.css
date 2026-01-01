@@ -3,17 +3,18 @@
 /* CSS Variables */
 :root {
   /* Colors */
-  --primary: #8B5CF6;
-  --primary-hover: #7C3AED;
-  --primary-light: #A78BFA;
-  --secondary: #EC4899;
-  --accent: #06B6D4;
+  --primary: #8e7cf0;
+  --primary-hover: #7260d6;
+  --primary-light: #d8d2fa;
+  --secondary: #674eeb;
+  --accent: #def07c;
 
   /* Backgrounds */
   --bg-main: #FFFFFF;
-  --bg-dark: #0F172A;
+  --bg-dark: #1e1b4b;
+  /* Deep purple-black */
   --bg-card: #F9FAFB;
-  --bg-glass: rgba(255, 255, 255, 0.8);
+  --bg-glass: rgba(255, 255, 255, 0.9);
 
   /* Text */
   --text-main: #1F2937;

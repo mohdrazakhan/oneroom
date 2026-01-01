@@ -1,0 +1,68 @@
+{
+    "firestore": {
+        "collections": {
+            "appStats": {
+                "documents": {
+                    "global": {
+                        "activeUsers": 12500,
+                        "tasksCompleted": 650000,
+                        "expensesTracked": 1250000,
+                        "satisfactionRate": 98,
+                        "appRating": 4.8,
+                        "totalDownloads": 75000,
+                        "lastUpdated": "2026-01-01T00:00:00Z"
+                    },
+                    "playStore": {
+                        "rating": 4.8,
+                        "ratingCount": 3200,
+                        "reviews": 2800,
+                        "downloads": 75000,
+                        "version": "2.1.0",
+                        "updated": "2025-12-15",
+                        "lastFetched": "2026-01-01T00:00:00Z"
+                    }
+                }
+            }
+        }
+    },
+    "notes": {
+        "activeUsers": "Total number of registered users in your app",
+        "tasksCompleted": "Total number of tasks marked as completed",
+        "expensesTracked": "Total dollar amount of all expenses tracked",
+        "satisfactionRate": "Percentage (0-100) of users who rated 4+ stars",
+        "appRating": "Current Play Store rating (0-5)",
+        "totalDownloads": "Total number of app downloads",
+        "lastUpdated": "Timestamp of last manual or automatic update"
+    },
+    "howToUpdate": {
+        "manual": "Go to Firebase Console > Firestore > appStats > global > Edit fields",
+        "automatic": "Deploy Cloud Functions from /functions folder",
+        "realtime": "Changes in Firestore automatically update the website"
+    },
+    "exampleValues": {
+        "small": {
+            "activeUsers": 500,
+            "tasksCompleted": 5000,
+            "expensesTracked": 50000,
+            "satisfactionRate": 95,
+            "appRating": 4.5,
+            "totalDownloads": 2500
+        },
+        "medium": {
+            "activeUsers": 12500,
+            "tasksCompleted": 650000,
+            "expensesTracked": 1250000,
+            "satisfactionRate": 98,
+            "appRating": 4.8,
+            "totalDownloads": 75000
+        },
+        "large": {
+            "activeUsers": 100000,
+            "tasksCompleted": 5000000,
+            "expensesTracked": 10000000,
+            "satisfactionRate": 99,
+            "appRating": 4.9,
+            "totalDownloads": 500000
+        }
+    }
+}
