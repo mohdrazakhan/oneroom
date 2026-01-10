@@ -96,6 +96,10 @@
     }
 
     .newsletter-form .btn {
-        width: 100%;
+        width: auto;
+        padding: 0.75rem 2rem;
+        align-self: center;
+        /* Center the button */
+        margin-top: 1rem;
     }
 }

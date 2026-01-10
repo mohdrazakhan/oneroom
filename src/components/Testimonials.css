@@ -188,24 +188,15 @@
 }
 
 @media (max-width: 768px) {
+    .testimonials-viewport {
+        padding: 1rem 0;
+        /* overflow: visible; Allow shadow */
+    }
+
     .testimonial-card {
         flex: 0 0 100%;
+        /* Show 1 at a time */
         margin: 0;
+        /* scroll-snap-align: center; */
     }
-
-    .testimonials-viewport {
-        padding: 1rem;
-    }
-
-    /* On mobile, we might need to adjust the translate percentage via JS or use a different prop.
-       For now, the JS logic uses 100 / 3. 
-       Actually, `activeIndex * (100 / 3)` implies 3 items visible.
-       If we want responsive, the React component needs to know screen size or use CSS variables.
-       
-       SIMPLE FIX: keep 3 items logic but let CSS handle valid layout? No, translate % depends on count.
-       
-       Let's stick to the user request: "Slide show only show 3 at a time". 
-       I will assume desktop usage mainly or acceptable behavior (small cards) on mobile for now, 
-       or I can update the JS to be responsive.
-    */
 }

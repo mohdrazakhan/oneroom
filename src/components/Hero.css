@@ -114,6 +114,39 @@
     font-family: var(--font-heading);
     color: var(--primary-hover);
     margin-bottom: 0.25rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Ensure mobile override works by checking specificity or order. 
+   The media query is below, so it should work. */
+
+.stat-live-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #ef4444;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #ef4444;
+    animation: blink 1.5s infinite;
+    display: inline-block;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: scale(0.8);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .hero .stat-label {
@@ -144,7 +177,8 @@
     position: absolute;
     border-radius: 50%;
     filter: blur(80px);
-    opacity: 0.4;
+    opacity: 0.15;
+    /* Reduced from 0.4 */
     z-index: -1;
     animation: pulse 4s infinite;
 }
@@ -179,60 +213,110 @@
 @media (max-width: 768px) {
     .hero {
         padding-top: 80px;
-        min-height: auto;
+        /* Reduced from 140px */
+        /* min-height: 100vh; Ensure it tries to fill screen */
+        min-height: 100svh;
+        /* Use small viewport height */
+        padding-bottom: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* Center content vertically */
     }
 
     .hero-content {
-        grid-template-columns: 1fr;
-        gap: 3rem;
+        display: flex;
+        flex-direction: column-reverse;
+        /* Image top */
+        gap: 1rem;
+        /* Reduced gap */
         text-align: center;
+        flex: 1;
+        justify-content: center;
     }
 
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 1.8rem;
+        /* Reduced from 2.5rem */
+        margin-bottom: 0.5rem;
     }
 
     .hero-description {
-        font-size: 1.1rem;
-        margin: 0 auto 2rem;
+        font-size: 0.9rem;
+        /* Reduced from 1.1rem */
+        margin: 0 auto 1rem;
+        line-height: 1.4;
+        max-width: 90%;
+    }
+
+    .badge {
+        margin-bottom: 0.5rem;
+        padding: 0.25rem 0.75rem;
+        font-size: 0.8rem;
     }
 
     .hero-buttons {
         justify-content: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
     }
 
     .hero-stats {
         justify-content: center;
-        gap: 2rem;
+        gap: 1rem;
+        padding-top: 0.5rem;
+        border-top: none;
+        /* Remove border to save space/visual noise */
     }
 
     .stat {
         text-align: center;
     }
 
+    .stat-number {
+        font-size: 1.2rem;
+        /* Reduced */
+    }
+
+    .stat-label {
+        font-size: 0.7rem;
+    }
+
     .phone-mockup img {
-        max-width: 400px;
+        max-width: 180px;
+        /* Significantly reduced from 280px */
         margin: 0 auto;
+        transform: translateY(0);
     }
 }
 
 @media (max-width: 480px) {
     .hero-title {
-        font-size: 2rem;
-    }
-
-    .hero-stats {
-        flex-direction: column;
-        gap: 1.5rem;
+        font-size: 1.6rem;
     }
 
     .hero-buttons {
-        flex-direction: column;
-        align-items: stretch;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 0.5rem;
     }
 
     .hero-buttons .btn {
+        padding: 0.6rem 0.4rem;
+        /* Smaller button */
+        font-size: 0.8rem;
+        flex: 1 1 0px;
         width: 100%;
+        min-width: 0;
+    }
+
+    .hero-stats {
+        gap: 1rem;
+    }
+
+    .phone-mockup img {
+        max-width: 200px;
+        /* Slight adjust */
     }
 }
 

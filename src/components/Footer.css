@@ -116,11 +116,39 @@
     }
 
     .footer-links {
-        grid-template-columns: 1fr;
+        /* Horizontal row for lists */
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+
+    .footer-column h4 {
+        font-size: 0.9rem;
+        /* Smaller headings to fit */
+    }
+
+    .footer-column ul li a {
+        font-size: 0.85rem;
     }
 
     .footer-bottom {
         flex-direction: column;
         text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-links {
+        /* Still keep 3 col on small screens as requested, but might be tight. 
+           Reducing font size further if needed, or letting it wrap if absolutely necessary.
+           User requested "same line", so we try 3 col. */
+        gap: 0.5rem;
+    }
+
+    .footer-column h4 {
+        font-size: 0.8rem;
+    }
+
+    .footer-column ul li a {
+        font-size: 0.75rem;
     }
 }

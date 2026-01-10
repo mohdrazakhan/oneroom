@@ -90,6 +90,12 @@ function Stats() {
     return (
         <section className="stats-section" ref={statsRef}>
             <div className="container">
+                <div className="live-indicator-wrapper">
+                    <div className="live-indicator">
+                        <span className="live-dot"></span>
+                        <span className="live-text">LIVE</span>
+                    </div>
+                </div>
                 <div className="stats-grid">
                     {/* Active Users */}
                     <div className="stat-card reveal">

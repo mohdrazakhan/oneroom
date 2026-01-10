@@ -73,7 +73,37 @@
 }
 
 @media (max-width: 768px) {
+    .showcase-scroll {
+        padding: 1rem;
+        gap: 1rem;
+    }
+
     .screenshot-card {
-        flex: 0 0 280px;
+        /* Show one at a time (almost full width) */
+        flex: 0 0 90vw;
+        scroll-snap-align: center;
+    }
+
+    .testimonials-viewport {
+        padding: 1rem 0;
+        overflow: visible;
+        /* Allow shadow */
+    }
+
+    .testimonials-track {
+        /* On mobile, we rely on scroll snap instead of transform for simpler UX if wanted,
+           BUT preserving the slider logic: we just need 1 item to be 100% width. */
+    }
+
+    .testimonial-card {
+        flex: 0 0 100%;
+        /* Show 1 at a time */
+        margin: 0;
+        scroll-snap-align: center;
+    }
+
+    .testimonials-slider-container {
+        /* Allow scroll for touch users if buttons are small */
+        /* overflow-x: hidden;  <-- kept hidden to use buttons, or we can enable swipe */
     }
 }

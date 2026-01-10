@@ -20,9 +20,9 @@ function Testimonials() {
             text: 'Perfect for busy professionals. Chores are finally under control and the notification system is a lifesaver.'
         },
         {
-            name: 'Danish Alam',
-            role: 'Data Science Engineer',
-            avatar: '👨‍💻',
+            name: 'Pranyush Jha',
+            role: 'Student',
+            avatar: '👩‍🎓',
             rating: 5,
             text: 'Impressive UI/UX. The expense analytics are detailed and accurate. Makes managing shared finances completely seamless.'
         },
@@ -53,10 +53,8 @@ function Testimonials() {
 
     useEffect(() => {
         const handleResize = () => {
-            if (window.innerWidth < 768) {
+            if (window.innerWidth < 1024) {
                 setItemsPerSlide(1)
-            } else if (window.innerWidth < 1024) {
-                setItemsPerSlide(2)
             } else {
                 setItemsPerSlide(3)
             }
@@ -117,7 +115,12 @@ function Testimonials() {
                                 <div
                                     key={index}
                                     className="testimonial-card"
-                                    style={{ flex: `0 0 calc(${100 / itemsPerSlide}% - 1.5rem)` }}
+                                    style={{
+                                        flex: itemsPerSlide === 1
+                                            ? '0 0 100%'
+                                            : `0 0 calc(${100 / itemsPerSlide}% - 1.5rem)`,
+                                        margin: itemsPerSlide === 1 ? 0 : '0 0.75rem'
+                                    }}
                                 >
                                     <div className="testimonial-rating">
                                         {[...Array(testimonial.rating)].map((_, i) => (

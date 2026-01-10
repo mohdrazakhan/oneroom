@@ -5,9 +5,9 @@ import statsService from '../services/statsService'
 function Hero() {
     const [particles, setParticles] = useState([])
     const [stats, setStats] = useState({
-        activeUsers: '10K+',
-        appRating: '4.8★',
-        downloads: '50K+'
+        activeUsers: '0+',
+        appRating: '0.0★',
+        downloads: '0+'
     })
 
     useEffect(() => {
@@ -139,7 +139,10 @@ function Hero() {
 
                         <div className="hero-stats">
                             <div className="stat">
-                                <div className="stat-number">{stats.activeUsers}</div>
+                                <div className="stat-number">
+                                    {stats.activeUsers}
+                                    <span className="stat-live-dot" title="Live Count"></span>
+                                </div>
                                 <div className="stat-label">Active Users</div>
                             </div>
                             <div className="stat">
