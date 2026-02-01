@@ -1,0 +1,15 @@
+[
+    {
+        "relation": [
+            "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+            "namespace": "android_app",
+            "package_name": "com.oneroom.app",
+            "sha256_cert_fingerprints": [
+                "05:48:B7:89:AC:36:8E:6A:1A:64:7B:1F:AD:D1:38:1B:BA:44:86:F3:CE:66:9A:0A:AA:D3:E8:85:94:B9:F4:F5",
+                "E9:F6:7E:3D:26:31:8B:B6:BA:66:7A:C3:55:0E:FA:A6:3F:50:F8:B4:BB:79:05:98:03:B7:3F:F8:60:36:32:DB"
+            ]
+        }
+    }
+]

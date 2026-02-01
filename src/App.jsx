@@ -13,6 +13,7 @@ import AboutPage from './pages/AboutPage'
 import SupportPage from './pages/SupportPage'
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage'
 import TermsPage from './pages/TermsPage'
+import JoinRoomPage from './pages/JoinRoomPage'
 
 function App() {
   const [showChat, setShowChat] = useState(false)
@@ -54,6 +55,7 @@ function App() {
         <Route path="/support" element={<SupportPage />} />
         <Route path="/privacy" element={<PrivacyPolicyPage />} />
         <Route path="/terms" element={<TermsPage />} />
+        <Route path="/join/:roomId" element={<JoinRoomPage />} />
       </Routes>
       <Footer />
       <ChatWidget show={showChat} onToggle={() => setShowChat(!showChat)} />
