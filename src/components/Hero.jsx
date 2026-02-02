@@ -40,7 +40,8 @@ function Hero() {
 
                     setStats({
                         activeUsers: formatNumber(data.activeUsers),
-                        appRating: `${data.appRating !== undefined ? data.appRating : 0}★`,
+                        appRating: `${data.appRating !== undefined ? Number(data.appRating).toFixed(1) : '0.0'}★`,
+                        ratingCount: data.ratingCount,
                         downloads: formatNumber(data.totalDownloads)
                     })
                 })
@@ -146,7 +147,10 @@ function Hero() {
                                 <div className="stat-label">Active Users</div>
                             </div>
                             <div className="stat">
-                                <div className="stat-number">{stats.appRating}</div>
+                                <div className="stat-number">
+                                    {stats.appRating}
+                                    {stats.ratingCount && <span style={{ fontSize: '0.8rem', opacity: 0.7, marginLeft: '5px' }}>({stats.ratingCount})</span>}
+                                </div>
                                 <div className="stat-label">App Rating</div>
                             </div>
                             <div className="stat">

@@ -62,6 +62,7 @@ exports.updatePlayStoreStats = functions.scheduler.onSchedule({
         // Also update the global stats with rating and downloads
         await db.collection('appStats').doc('global').set({
             appRating: playStoreStats.rating,
+            ratingCount: playStoreStats.ratingCount, // Added rating count
             totalDownloads: playStoreStats.downloads,
             lastUpdated: admin.firestore.FieldValue.serverTimestamp()
         }, { merge: true });
@@ -88,7 +89,7 @@ exports.fetchPlayStoreData = functions.https.onRequest(async (req, res) => {
 
         const APP_ID = 'com.oneroom.app'; // Your actual package name
 
-        const appData = await gplay.app({ appId: APP_ID });
+        const appData = await gplay.app({ appId: APP_ID, country: 'in' });
 
         const playStoreStats = {
             rating: appData.score || 0,
