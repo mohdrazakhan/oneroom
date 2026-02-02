@@ -142,7 +142,9 @@ class StatsService {
         return {
             activeUsers: 10000,
             tasksCompleted: 500000,
+            totalExpensesCount: 25000, // Added missing field
             expensesTracked: 1000000,
+            bugReports: 120, // Added missing field
             satisfactionRate: 98,
             appRating: 4.8,
             totalDownloads: 50000,
